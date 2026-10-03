@@ -16,6 +16,25 @@ More screenshots are in [docs/screenshots](docs/screenshots) (login, sent, searc
 - **Frontend:** React 19, Vite, Tailwind 4, React Router, TanStack Query, TipTap for the editor
 - **Infra:** Postgres 17, Redis 7.4 and Elasticsearch 8.19, all in `docker-compose.yml`
 
+## Features
+
+**Backend**
+
+- **Scheduler:** `POST /api/campaigns` takes the recipients and a start time and creates one BullMQ delayed job per email. No cron anywhere.
+- **Persistence:** every email is a row in Postgres, Redis runs with AOF, and on start-up a reconciler re-adds any missing jobs. Stopping or crashing the server doesn't lose emails or send them twice.
+- **Rate limiting:** per-sender, per-campaign and optional global hourly caps plus a minimum gap between sends, all checked by one Lua script in Redis. Emails over the limit move to the next window instead of being dropped.
+- **Concurrency:** `WORKER_CONCURRENCY` sets how many jobs a worker runs in parallel, and you can start several worker processes. The limits and the send claim are shared through Redis and Postgres, so they still hold.
+- Also: multiple Ethereal senders per user, retries for temporary SMTP errors, Elasticsearch search, Bull Board at `/admin/queues`, and Slack alerts when a sender hits its limit.
+
+**Frontend**
+
+- **Login:** real Google OAuth. Name, email and avatar are shown in the sidebar with a logout button.
+- **Dashboard:** Scheduled and Sent tabs with live counts, search, pagination, and loading/empty states. Lists refresh every 5 seconds.
+- **Compose:** sender picker, recipients typed in or uploaded from a CSV/TXT (shows how many addresses it found), subject, rich-text body, delay between emails, hourly limit, and Send now or Send Later with a date/time picker.
+- **Tables:** Scheduled shows email, subject, scheduled time and status (Scheduled / Rate limited). Sent shows email, subject, sent time and Sent / Failed.
+- **Email detail:** the body, planned vs actual send time, attempts, the SMTP error if it failed, and a link to the message on Ethereal.
+- Slack card to connect, send a test message or disconnect. Works on mobile too.
+
 ## Running it locally
 
 You need Node 20.19+ and Docker.
@@ -25,6 +44,13 @@ docker compose up -d                    # Postgres on 5433, Redis on 6379, Elast
 cp backend/.env.example backend/.env    # then fill in SESSION_SECRET + Google/Slack keys (see below)
 npm install                             # npm workspaces, installs backend and frontend
 npm run dev                             # API + worker + dashboard
+```
+
+`npm run dev` starts everything at once. To run the backend and frontend separately (after `docker compose up -d`):
+
+```bash
+npm run dev -w backend     # Express API + BullMQ worker, http://localhost:4000
+npm run dev -w frontend    # React dashboard, http://localhost:5173
 ```
 
 Postgres runs on 5433 instead of 5432 so it doesn't clash with a local install.
