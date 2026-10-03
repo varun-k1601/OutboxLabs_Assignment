@@ -1,0 +1,21 @@
+node_modules/
+dist/
+coverage/
+*.log
+.env
+.env.local
+.env.*.local
+!.env.example
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.tsbuildinfo
+backend/.certs/
+Thumbs.db
+
+# local stuff that shouldn't be in the repo
+.claude/
+docs/DEMO.md
+*.mp4
+*.mov

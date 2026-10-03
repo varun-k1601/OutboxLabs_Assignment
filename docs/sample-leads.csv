@@ -1,0 +1,17 @@
+first_name,last_name,email,company
+Oliver,Brown,oliver.brown@domain.io,Domain
+Emma,Wilson,emma.wilson@northwind.com,Northwind
+Liam,Chen,liam.chen@acme.io,Acme
+Sophia,Patel,sophia.patel@globex.com,Globex
+Noah,Garcia,noah.garcia@initech.com,Initech
+Ava,Martin,ava.martin@umbrella.co,Umbrella
+Mia,Lopez,mia.lopez@contoso.com,Contoso
+Lucas,Kim,lucas.kim@fabrikam.com,Fabrikam
+Isabella,Rossi,isabella.rossi@tailspin.io,Tailspin
+Ethan,Nguyen,ethan.nguyen@wingtip.com,Wingtip
+Amelia,Silva,amelia.silva@litware.com,Litware
+James,Muller,james.muller@adventure-works.com,Adventure Works
+Harper,Ivanova,harper.ivanova@proseware.com,Proseware
+Benjamin,Okafor,benjamin.okafor@woodgrove.com,Woodgrove
+Charlotte,Dubois,charlotte.dubois@lucerne.co,Lucerne
+Oliver,Brown,OLIVER.BROWN@domain.io,Domain (duplicate row)

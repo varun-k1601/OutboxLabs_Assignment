@@ -1,0 +1,74 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Brand: ReachInbox green */
+  --color-brand-50: #effbf2;
+  --color-brand-100: #d9f5e0;
+  --color-brand-200: #b2e9c2;
+  --color-brand-300: #7fd79b;
+  --color-brand-400: #46bd6e;
+  --color-brand-500: #22a352;
+  --color-brand-600: #168a42;
+  --color-brand-700: #146d37;
+  --color-brand-800: #14572f;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-500;
+  }
+}
+
+/* TipTap editor */
+.rich-text .ProseMirror {
+  @apply min-h-56 px-4 py-3 text-[15px] leading-relaxed text-gray-800 outline-none;
+}
+
+.rich-text .ProseMirror p {
+  @apply my-1.5;
+}
+
+.rich-text .ProseMirror h1 {
+  @apply mt-3 mb-2 text-2xl font-bold;
+}
+
+.rich-text .ProseMirror h2 {
+  @apply mt-3 mb-2 text-xl font-semibold;
+}
+
+.rich-text .ProseMirror h3 {
+  @apply mt-3 mb-1.5 text-lg font-semibold;
+}
+
+.rich-text .ProseMirror ul {
+  @apply my-2 list-disc pl-6;
+}
+
+.rich-text .ProseMirror ol {
+  @apply my-2 list-decimal pl-6;
+}
+
+.rich-text .ProseMirror blockquote {
+  @apply my-2 border-l-4 border-gray-200 pl-3 text-gray-600;
+}
+
+.rich-text .ProseMirror a {
+  @apply text-brand-600 underline;
+}
+
+.rich-text .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  @apply pointer-events-none float-left h-0 text-gray-400;
+}
