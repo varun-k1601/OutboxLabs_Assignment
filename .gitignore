@@ -17,5 +17,6 @@ Thumbs.db
 # local stuff that shouldn't be in the repo
 .claude/
 docs/DEMO.md
+/context.md
 *.mp4
 *.mov

@@ -2,7 +2,7 @@
 
 My submission for the ReachInbox backend + frontend assignment. You log in with Google, write an email, upload a list of leads and pick when it should start. The backend schedules every email as a BullMQ delayed job (no cron), sends them through Ethereal SMTP while respecting per-sender rate limits, and posts to Slack when a sender hits its limit.
 
-**Demo video:** _add link here_
+**Demo video:** https://drive.google.com/file/d/1cfWor7UKWYZ2CK7I4-KbMe3_uqXOIiHb/view
 
 | Scheduled | Compose |
 | --- | --- |
